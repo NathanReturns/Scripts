@@ -1,0 +1,489 @@
+--Made by NathanTSG#6975
+
+repeat task.wait() until game:IsLoaded()
+if RoPhoneLoaded then
+    return
+end
+if is_synapse_function then
+ws = syn.websocket.connect("wss://RoPhone.nathanreturns.repl.co")
+pcall(function() getgenv().RoPhoneLoaded = true end)
+local RoPhone = Instance.new("ScreenGui")
+local Phone = Instance.new("Frame")
+local H = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local Frame = Instance.new("Frame")
+local HomeButton = Instance.new("TextButton")
+local Screen = Instance.new("Frame")
+local HomeFrame = Instance.new("Frame")
+local WallPaper = Instance.new("ImageLabel")
+local ChatR = Instance.new("ImageButton")
+local UICorner_2 = Instance.new("UICorner")
+local TextLabel = Instance.new("TextLabel")
+local Contacts = Instance.new("ImageButton")
+local UICorner_3 = Instance.new("UICorner")
+local TextLabel_2 = Instance.new("TextLabel")
+local TextLabel_3 = Instance.new("TextLabel")
+local ContactsFrame = Instance.new("Frame")
+local ScrollingFrame = Instance.new("ScrollingFrame")
+local UIListLayout = Instance.new("UIListLayout")
+local TextLabel_4 = Instance.new("TextLabel")
+local ChatFrame = Instance.new("Frame")
+local Chats = Instance.new("ScrollingFrame")
+local UIListLayout_2 = Instance.new("UIListLayout")
+local Frame_2 = Instance.new("Frame")
+local MsgBox = Instance.new("TextBox")
+local UICorner_4 = Instance.new("UICorner")
+local Send = Instance.new("TextButton")
+local UICorner_5 = Instance.new("UICorner")
+local Frame_3 = Instance.new("Frame")
+local UICorner_6 = Instance.new("UICorner")
+local Frame_4 = Instance.new("Frame")
+local UICorner_7 = Instance.new("UICorner")
+local UICorner_8 = Instance.new("UICorner")
+local Frame_5 = Instance.new("Frame")
+local UICorner_9 = Instance.new("UICorner")
+local Frame_6 = Instance.new("Frame")
+local UICorner_10 = Instance.new("UICorner")
+
+RoPhone.Name = "RoPhone"
+RoPhone.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+RoPhone.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Phone.Name = "Phone"
+Phone.Parent = RoPhone
+Phone.BackgroundColor3 = Color3.fromRGB(85, 85, 85)
+Phone.Position = UDim2.new(0.0560975708, 0, 0.367081165, 0)
+Phone.Size = UDim2.new(0, 267, 0, 442)
+
+H.Name = "H"
+H.Parent = Phone
+H.BackgroundColor3 = Color3.fromRGB(111, 111, 111)
+H.Position = UDim2.new(0.404494375, 0, 0.90892297, 0)
+H.Size = UDim2.new(0, 52, 0, 36)
+
+UICorner.CornerRadius = UDim.new(0, 15)
+UICorner.Parent = H
+
+Frame.Parent = H
+Frame.BackgroundColor3 = Color3.fromRGB(111, 111, 111)
+Frame.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Frame.Position = UDim2.new(0.200924501, 0, 0.148148134, 0)
+Frame.Size = UDim2.new(0, 31, 0, 24)
+
+HomeButton.Name = "HomeButton"
+HomeButton.Parent = Frame
+HomeButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+HomeButton.BackgroundTransparency = 1.000
+HomeButton.Position = UDim2.new(-0.304777086, 0, -0.222221375, 0)
+HomeButton.Size = UDim2.new(0, 51, 0, 36)
+HomeButton.Font = Enum.Font.SourceSans
+HomeButton.Text = ""
+HomeButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+HomeButton.TextSize = 14.000
+
+Screen.Name = "Screen"
+Screen.Parent = Phone
+Screen.BackgroundColor3 = Color3.fromRGB(127, 115, 255)
+Screen.BorderSizePixel = 3
+Screen.Position = UDim2.new(0.0936329588, 0, 0.103315078, 0)
+Screen.Size = UDim2.new(0, 217, 0, 349)
+
+HomeFrame.Name = "HomeFrame"
+HomeFrame.Parent = Screen
+HomeFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+HomeFrame.Position = UDim2.new(0.00460829493, 0, 0, 0)
+HomeFrame.Size = UDim2.new(0, 216, 0, 349)
+HomeFrame.Visible = false
+
+WallPaper.Name = "WallPaper"
+WallPaper.Parent = HomeFrame
+WallPaper.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+WallPaper.BackgroundTransparency = 0.350
+WallPaper.BorderSizePixel = 0
+WallPaper.Position = UDim2.new(0, 0, 0.074498564, 0)
+WallPaper.Size = UDim2.new(0, 216, 0, 265)
+WallPaper.Image = "http://www.roblox.com/asset/?id=12475395404"
+WallPaper.ImageTransparency = 0.200
+
+ChatR.Name = "ChatR"
+ChatR.Parent = HomeFrame
+ChatR.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ChatR.Position = UDim2.new(0.0324074067, 0, 0.0200573057, 0)
+ChatR.Size = UDim2.new(0, 39, 0, 41)
+ChatR.Image = "http://www.roblox.com/asset/?id=12516851445"
+
+UICorner_2.Parent = ChatR
+
+TextLabel.Parent = HomeFrame
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.Position = UDim2.new(0.0324074104, 0, 0.13753581, 0)
+TextLabel.Size = UDim2.new(0, 39, 0, 9)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "Chat Room"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextSize = 14.000
+TextLabel.TextStrokeTransparency = 0.000
+
+Contacts.Name = "Contacts"
+Contacts.Parent = HomeFrame
+Contacts.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Contacts.Position = UDim2.new(0.310185194, 0, 0.0200573057, 0)
+Contacts.Size = UDim2.new(0, 39, 0, 41)
+Contacts.Image = "http://www.roblox.com/asset/?id=12475418195"
+
+UICorner_3.Parent = Contacts
+
+TextLabel_2.Parent = HomeFrame
+TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.BackgroundTransparency = 1.000
+TextLabel_2.Position = UDim2.new(0.310185194, 0, 0.13753581, 0)
+TextLabel_2.Size = UDim2.new(0, 39, 0, 9)
+TextLabel_2.Font = Enum.Font.SourceSans
+TextLabel_2.Text = "Online"
+TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.TextSize = 14.000
+TextLabel_2.TextStrokeTransparency = 0.000
+
+TextLabel_3.Parent = HomeFrame
+TextLabel_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_3.BorderSizePixel = 0
+TextLabel_3.Position = UDim2.new(0.031002963, 0, 0.927277565, 0)
+TextLabel_3.Size = UDim2.new(0, 200, 0, 14)
+TextLabel_3.Font = Enum.Font.SourceSans
+TextLabel_3.Text = "RoPhone v1.1"
+TextLabel_3.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_3.TextSize = 14.000
+
+ContactsFrame.Name = "ContactsFrame"
+ContactsFrame.Parent = Screen
+ContactsFrame.BackgroundColor3 = Color3.fromRGB(127, 115, 255)
+ContactsFrame.Size = UDim2.new(0, 216, 0, 349)
+ContactsFrame.Visible = false
+
+ScrollingFrame.Parent = ContactsFrame
+ScrollingFrame.Active = true
+ScrollingFrame.BackgroundColor3 = Color3.fromRGB(127, 115, 255)
+ScrollingFrame.BorderSizePixel = 0
+ScrollingFrame.Position = UDim2.new(0.00462962966, 0, 0.148997128, 0)
+ScrollingFrame.Size = UDim2.new(0, 215, 0, 297)
+ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+
+UIListLayout.Parent = ScrollingFrame
+UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.Padding = UDim.new(0, 6)
+
+ChatFrame.Name = "ChatFrame"
+ChatFrame.Parent = Screen
+ChatFrame.BackgroundColor3 = Color3.fromRGB(127, 115, 255)
+ChatFrame.Position = UDim2.new(0.0046081543, 0, 7.4505806e-09, 0)
+ChatFrame.Size = UDim2.new(0, 215, 0, 349)
+ChatFrame.Visible = false
+
+Chats.Name = "Chats"
+Chats.Parent = ChatFrame
+Chats.Active = true
+Chats.BackgroundColor3 = Color3.fromRGB(127, 115, 255)
+Chats.BorderSizePixel = 0
+Chats.Position = UDim2.new(0.0046513048, 0, 0.0200573057, 0)
+Chats.Size = UDim2.new(0, 213, 0, 323)
+Chats.CanvasSize = UDim2.new(0, 0, 0, 0)
+
+UIListLayout_2.Parent = Chats
+UIListLayout_2.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout_2.Padding = UDim.new(0, 6)
+
+Frame_2.Parent = ChatFrame
+Frame_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Frame_2.BorderSizePixel = 0
+Frame_2.Position = UDim2.new(0.00465116277, 0, 0.945558727, 0)
+Frame_2.Size = UDim2.new(0, 45, 0, 19)
+
+MsgBox.Name = "MsgBox"
+MsgBox.Parent = ChatFrame
+MsgBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+MsgBox.Position = UDim2.new(0.00324032805, 0, 0.945558727, 0)
+MsgBox.Size = UDim2.new(0, 178, 0, 19)
+MsgBox.Font = Enum.Font.SourceSans
+MsgBox.PlaceholderText = "Click here to start chatting."
+MsgBox.Text = ""
+MsgBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+MsgBox.TextScaled = true
+MsgBox.TextSize = 14.000
+MsgBox.TextWrapped = true
+MsgBox.TextXAlignment = Enum.TextXAlignment.Left
+
+UICorner_4.Parent = MsgBox
+
+Send.Name = "Send"
+Send.Parent = ChatFrame
+Send.BackgroundColor3 = Color3.fromRGB(0, 255, 21)
+Send.Position = UDim2.new(0.849751949, 0, 0.945558727, 0)
+Send.Size = UDim2.new(0, 31, 0, 19)
+Send.Font = Enum.Font.SourceSans
+Send.Text = ">"
+Send.TextColor3 = Color3.fromRGB(0, 0, 0)
+Send.TextSize = 14.000
+
+UICorner_5.Parent = Send
+
+Frame_3.Parent = Phone
+Frame_3.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+Frame_3.Position = UDim2.new(0.348314583, 0, 0.0466301478, 0)
+Frame_3.Size = UDim2.new(0, 16, 0, 14)
+
+UICorner_6.CornerRadius = UDim.new(0, 15)
+UICorner_6.Parent = Frame_3
+
+Frame_4.Parent = Phone
+Frame_4.BackgroundColor3 = Color3.fromRGB(134, 134, 134)
+Frame_4.BorderSizePixel = 0
+Frame_4.Position = UDim2.new(0.494382024, 0, 0.019261729, 0)
+Frame_4.Size = UDim2.new(0, 29, 0, 7)
+
+UICorner_7.CornerRadius = UDim.new(0, 15)
+UICorner_7.Parent = Frame_4
+
+UICorner_8.CornerRadius = UDim.new(0, 15)
+UICorner_8.Parent = Phone
+
+Frame_5.Parent = UICorner_8
+Frame_5.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+Frame_5.Position = UDim2.new(0.445692897, 0, 0.0529459417, 0)
+Frame_5.Size = UDim2.new(0, 55, 0, 7)
+
+UICorner_9.CornerRadius = UDim.new(0, 15)
+UICorner_9.Parent = Frame_5
+
+Frame_6.Parent = Phone
+Frame_6.BackgroundColor3 = Color3.fromRGB(31, 31, 31)
+Frame_6.Position = UDim2.new(0.460674107, 0, 0.0534175001, 0)
+Frame_6.Size = UDim2.new(0, 47, 0, 7)
+
+UICorner_10.CornerRadius = UDim.new(0, 15)
+UICorner_10.Parent = Frame_6
+
+HomeFrame.Visible = true
+
+local function NewMsg(msg,n)
+    local NewMsg = Instance.new("Frame")
+    local Name = Instance.new("TextLabel")
+    local Message = Instance.new("TextLabel")
+    
+    NewMsg.Name = "NewMsg"
+    NewMsg.Parent = Chats
+    NewMsg.BackgroundColor3 = Color3.fromRGB(106, 96, 213)
+    NewMsg.BorderSizePixel = 0
+    NewMsg.Position = UDim2.new(0.0352112688, 0, 0, 0)
+    NewMsg.Size = UDim2.new(0, 198, 0, 94)
+    
+    Name.Name = "Name"
+    Name.Parent = NewMsg
+    Name.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Name.BackgroundTransparency = 1.000
+    Name.Size = UDim2.new(0, 198, 0, 16)
+    Name.Font = Enum.Font.SourceSans
+    Name.Text = getgenv().name.." ("..n.."):"
+    Name.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Name.TextScaled = true
+    Name.TextSize = 14.000
+    Name.TextWrapped = true
+    
+    Message.Name = "Message"
+    Message.Parent = NewMsg
+    Message.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Message.BackgroundTransparency = 1.000
+    Message.BorderSizePixel = 0
+    Message.Position = UDim2.new(0.0252525248, 0, 0.117021278, 0)
+    Message.Size = UDim2.new(0, 185, 0, 83)
+    Message.Font = Enum.Font.SourceSans
+    Message.Text = msg
+    Message.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Message.TextScaled = true
+    Message.TextSize = 14.000
+    Message.TextWrapped = true
+end
+
+local TextLabel_4 = Instance.new("TextLabel")
+    TextLabel_4.Parent = ContactsFrame
+    TextLabel_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    TextLabel_4.BackgroundTransparency = 1.000
+    TextLabel_4.Position = UDim2.new(0.0416666679, 0, 0.0200573076, 0)
+    TextLabel_4.Size = UDim2.new(0, 200, 0, 26)
+    TextLabel_4.Font = Enum.Font.SourceSans
+    TextLabel_4.Text = "Online:"
+    TextLabel_4.TextColor3 = Color3.fromRGB(255, 255, 255)
+    TextLabel_4.TextScaled = true
+    TextLabel_4.TextSize = 14.000
+    TextLabel_4.TextWrapped = true
+
+    local function NameTag(nickname, username)
+    plrname = username
+    if game.Players:FindFirstChild(plrname) then
+    local BillboardGui = Instance.new("BillboardGui")
+    local Name = Instance.new("TextLabel")
+
+    BillboardGui.Parent = game.Players[plrname].Character.Head
+    BillboardGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    BillboardGui.Active = true
+    BillboardGui.LightInfluence = 1.000
+    BillboardGui.MaxDistance = 60.000
+    BillboardGui.Size = UDim2.new(4, 0, 1, 0)
+    BillboardGui.StudsOffset = Vector3.new(0, 2.2, 0)
+    BillboardGui.AlwaysOnTop = true
+
+    Name.Name = "Name"
+    Name.Parent = BillboardGui
+    Name.AnchorPoint = Vector2.new(0.5, 0.5)
+    Name.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Name.BackgroundTransparency = 1.000
+    Name.Position = UDim2.new(0.5, 0, 0.5, 0)
+    Name.Size = UDim2.new(1, 0, 1, 0)
+    Name.Font = Enum.Font.SourceSans
+    Name.Text = "📱 "..nickname
+    Name.TextColor3 = Color3.fromRGB(0, 0, 0)
+    Name.TextScaled = true
+    Name.TextSize = 14.000
+    Name.TextStrokeTransparency = 0.000
+    Name.TextStrokeColor3 = Color3.fromRGB(255, 31, 1)
+    Name.TextWrapped = true
+    end
+end
+
+
+local function NewContact(n, playing, placeid, jobid, nn)
+    local Plr = Instance.new("Frame")
+    local WhatPlaying = Instance.new("TextLabel")
+    local Join = Instance.new("TextButton")
+    
+    Plr.Name = "Plr"
+    Plr.Parent = ScrollingFrame
+    Plr.BackgroundColor3 = Color3.fromRGB(100, 91, 202)
+    Plr.BorderSizePixel = 0
+    Plr.Position = UDim2.new(0.0418393873, 0, 0.147424564, 0)
+    Plr.Size = UDim2.new(0, 199, 0, 60)
+    WhatPlaying.Name = "WhatPlaying"
+    WhatPlaying.Parent = Plr
+    WhatPlaying.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    WhatPlaying.BackgroundTransparency = 1.000
+    WhatPlaying.BorderSizePixel = 0
+    WhatPlaying.Position = UDim2.new(-0.00502512604, 0, 0, 0)
+    WhatPlaying.Size = UDim2.new(0, 157, 0, 59)
+    WhatPlaying.Font = Enum.Font.SourceSans
+    WhatPlaying.Text = nn.." ("..n.."): Playing "..playing
+    WhatPlaying.TextColor3 = Color3.fromRGB(0, 255, 17)
+    WhatPlaying.TextScaled = true
+    WhatPlaying.TextSize = 14.000
+    WhatPlaying.TextWrapped = true
+    WhatPlaying.TextXAlignment = Enum.TextXAlignment.Left
+    WhatPlaying.TextYAlignment = Enum.TextYAlignment.Top
+
+    Join.Name = "Join"
+    Join.Parent = Plr
+    Join.BackgroundColor3 = Color3.fromRGB(34, 255, 0)
+    Join.BorderSizePixel = 0
+    Join.Position = UDim2.new(0.798994958, 0, 0, 0)
+    Join.Size = UDim2.new(0, 40, 0, 59)
+    Join.Font = Enum.Font.SourceSans
+    Join.Text = "Join"
+    Join.TextColor3 = Color3.fromRGB(0, 0, 0)
+    Join.TextScaled = true
+    Join.TextSize = 14.000
+    Join.TextWrapped = true
+    Join.MouseButton1Click:Connect(function()
+    game:GetService("TeleportService"):TeleportToPlaceInstance(placeid, jobid, game.Players.LocalPlayer)
+    end)
+    local children = Plr:GetChildren()
+    local count = #children
+    if count == 0 then
+        Plr:Destroy()
+    end
+end
+
+
+Send.MouseButton1Click:Connect(function()
+    NewMsg(MsgBox.Text, game.Players.LocalPlayer.Name)
+    ws:Send(MsgBox.Text..", "..game.Players.LocalPlayer.Name)
+    MsgBox.Text = ""
+end)
+
+HomeButton.MouseButton1Click:Connect(function()
+    ContactsFrame.Visible = false
+    ChatFrame.Visible = false
+    HomeFrame.Visible = true
+end)
+
+ChatR.MouseButton1Click:Connect(function()
+    ContactsFrame.Visible = false
+    ChatFrame.Visible = true
+    HomeFrame.Visible = false
+end)
+
+Contacts.MouseButton1Click:Connect(function()
+    ContactsFrame.Visible = true
+    ChatFrame.Visible = false
+    HomeFrame.Visible = false
+end)
+
+ws.OnMessage:Connect(function(data)
+    print(data)
+    if not string.find(data, game.Players.LocalPlayer.Name) and not string.find(data, "- PLAYERS GAME") and not string.find(data, "NEW CONNECTION") then
+        local split = data:split(", ")
+        m = split[1]
+        n = split[2]
+        NewMsg(m,n)
+    end
+end)
+
+function contains(table, item)
+    for _, value in pairs(table) do
+        if value == item then
+            return true
+        end
+    end
+    return false
+end
+
+Displayed = {}
+
+ws.OnMessage:Connect(function(data)
+if string.find(data, "- PLAYERS GAME") then
+    local split = data:split(", ")
+    n = split[1]
+    pid = split[2]
+    jid = split[3]
+    gn = split[4]
+    pn = split[5]
+    nn = split[7]
+    NameTag(nn, n)
+    if pn == game.Players.LocalPlayer.Name or pn ~= nil and not contains(Displayed, pn) then
+    NewContact(n, gn, pid, jid, nn)
+    table.insert(Displayed, pn)
+end
+end
+end)
+
+
+local MarketplaceService = game:GetService("MarketplaceService")
+gname = MarketplaceService:GetProductInfo(game.PlaceId)["Name"]
+ws:Send(game.Players.LocalPlayer.Name..", "..game.PlaceId..", "..game.JobId..", "..gname..", - PLAYERS GAME, NICKNAME:, "..getgenv().name)
+ws:Send("NEW CONNECTION, "..game.Players.LocalPlayer.Name)
+
+ws.OnMessage:Connect(function(data)
+    if string.find(data, "NEW CONNECTION") then
+        local split = data:split(", ")
+        n = split[2]
+        ws:Send(game.Players.LocalPlayer.Name..", "..game.PlaceId..", "..game.JobId..", "..gname..", - PLAYERS GAME, "..n..", "..getgenv().name)
+task.wait(.2)
+end
+end)
+
+ScrollingFrame.CanvasSize = UDim2.new(0,0,100,0)
+Chats.CanvasSize = UDim2.new(0,0,100,0)
+ScrollingFrame.ScrollBarThickness = .1
+Chats.ScrollBarThickness = .1
+Phone.Active = true
+Phone.Draggable = true
+end
