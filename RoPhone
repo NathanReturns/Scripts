@@ -402,6 +402,19 @@ local function NewContact(n, playing, placeid, jobid, nn)
     end
 end
 
+Team = Instance.new("Team",game.Teams)
+Team.Name = "_"
+Team.AutoAssignable = false
+task.wait(.1)
+game.Teams._.Name = "📱"
+Team.TeamColor = BrickColor.new(170, 0, 0)
+game.Players.LocalPlayer.Team = Team
+
+local function team(person)
+    if game.Players:FindFirstChild(person) then
+    game.Players[person].Team = Team
+    end
+end
 
 Send.MouseButton1Click:Connect(function()
     NewMsg(MsgBox.Text, game.Players.LocalPlayer.Name)
@@ -458,6 +471,7 @@ if string.find(data, "- PLAYERS GAME") then
     pn = split[5]
     nn = split[7]
     NameTag(nn, n)
+    team(n)
     if pn == game.Players.LocalPlayer.Name or pn ~= nil and not contains(Displayed, pn) then
     NewContact(n, gn, pid, jid, nn)
     table.insert(Displayed, pn)
