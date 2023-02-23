@@ -465,6 +465,26 @@ end
 end
 end)
 
+local Time = Instance.new("TextLabel")
+Time.Name = "Time"
+Time.Parent = game.Players.LocalPlayer.PlayerGui.RoPhone.Phone.Screen.HomeFrame
+Time.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Time.BorderSizePixel = 0
+Time.Position = UDim2.new(0.0356325917, 0, 0.828080237, 0)
+Time.Size = UDim2.new(0, 200, 0, 26)
+Time.Font = Enum.Font.SourceSans
+Time.Text = "TIME"
+Time.TextColor3 = Color3.fromRGB(0, 0, 0)
+Time.TextScaled = true
+Time.TextSize = 14.000
+Time.TextWrapped = true
+
+task.spawn(function()
+    repeat task.wait()
+        time = os.date("%H:".."%M".." %p")
+        Time.Text = time
+    until false
+end)
 
 local MarketplaceService = game:GetService("MarketplaceService")
 gname = MarketplaceService:GetProductInfo(game.PlaceId)["Name"]
