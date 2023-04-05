@@ -1,3 +1,5 @@
+getgenv().name = "Nathan"
+
 if getgenv().name == nil or getgenv().name == "" then
     getgenv().name = string.sub(game.Players.LocalPlayer.Name,1, 4)
 end
@@ -403,22 +405,6 @@ local function NewContact(n, playing, placeid, jobid, nn)
         Plr:Destroy()
     end
 end
-team = false
-
-local function team(person)
-    if team == false then
-        Team = Instance.new("Team",game.Teams)
-        Team.Name = "_"
-        Team.AutoAssignable = false
-        task.wait(.1)
-        game.Teams._.Name = "📱"
-        Team.TeamColor = BrickColor.new(170, 0, 0)
-        team(game.Players.LocalPlayer.Name)
-    end
-    if game.Players:FindFirstChild(person) then
-        game.Players[person].Team = Team
-    end
-end
 
 Send.MouseButton1Click:Connect(function()
     NewMsg(MsgBox.Text, game.Players.LocalPlayer.Name, getgenv().name)
@@ -459,6 +445,7 @@ ws.OnMessage:Connect(function(data)
     if data == "A client disconnected." then
         ws:Send(game.Players.LocalPlayer.Name..", is still connected.")
         Connected = {}
+        Checking = true
     end
 end)
 
@@ -472,28 +459,21 @@ end)
 
 task.spawn(function()
 repeat task.wait(3)
-    if Connected then
+    if Connected and Checking == true then
     for i,v in pairs(game.Players.LocalPlayer.PlayerGui.RoPhone.Phone.Screen.ContactsFrame.ScrollingFrame:GetChildren()) do
         if v.Name == "Plr" then
             local split = v.WhatPlaying.Text:split(" ")
             local name = split[1]
             if not string.find(table.concat(Connected),name) then
                 v:Destroy()
+                table.remove(Displayed,table.find(Displayed,name))
+                Checking = false
             end
         end
     end
     end
 until false
 end)
-
-function IsConnected(name)
-    for i,v in pairs(Connected) do
-        if v == name then
-            return true
-        end
-    end
-    return false
-end
 
 function contains(table, item)
     for _, value in pairs(table) do
@@ -516,7 +496,6 @@ if string.find(data, "- PLAYERS GAME") then
     pn = split[5]
     nn = split[7]
     NameTag(nn, n)
-    team(n)
     if pn == game.Players.LocalPlayer.Name or pn ~= nil and not contains(Displayed, pn) then
     NewContact(n, gn, pid, jid, nn)
     table.insert(Displayed, pn)
