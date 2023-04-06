@@ -1,5 +1,3 @@
-getgenv().name = "Nathan"
-
 if getgenv().name == nil or getgenv().name == "" then
     getgenv().name = string.sub(game.Players.LocalPlayer.Name,1, 4)
 end
@@ -493,12 +491,12 @@ if string.find(data, "- PLAYERS GAME") then
     pid = split[2]
     jid = split[3]
     gn = split[4]
-    pn = split[5]
+    pn = split[6]
     nn = split[7]
     NameTag(nn, n)
-    if pn == game.Players.LocalPlayer.Name or pn ~= nil and not contains(Displayed, pn) then
+    if not contains(Displayed, n) then
+    table.insert(Displayed, n)
     NewContact(n, gn, pid, jid, nn)
-    table.insert(Displayed, pn)
 end
 end
 end)
@@ -533,7 +531,7 @@ ws.OnMessage:Connect(function(data)
     if string.find(data, "NEW CONNECTION") then
         local split = data:split(", ")
         n = split[2]
-        ws:Send(game.Players.LocalPlayer.Name..", "..game.PlaceId..", "..game.JobId..", "..gname..", - PLAYERS GAME, "..n..", "..getgenv().name)
+        ws:Send(game.Players.LocalPlayer.Name..", "..game.PlaceId..", "..game.JobId..", "..gname..", - PLAYERS GAME, NICKNAME:, "..getgenv().name)
 task.wait(.2)
 end
 end)
