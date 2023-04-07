@@ -1,6 +1,4 @@
--- please dont fuck with the websocket :)
-
-getgenv().name = "Nathan"
+--Please dont fuck with the websocket :)
 
 if getgenv().name == nil or getgenv().name == "" then
     getgenv().name = string.sub(game.Players.LocalPlayer.Name,1, 4)
@@ -10,8 +8,18 @@ repeat task.wait() until game:IsLoaded()
 if RoPhoneLoaded then
     return
 end
-if is_synapse_function then
-ws = syn.websocket.connect("wss://RoPhone.nathanreturns.repl.co")
+
+local function Connect()
+if syn.websocket then ws = syn.websocket.connect("wss://RoPhone.nathanreturns.repl.co") end
+if WebSocket then ws = WebSocket.connect("wss://RoPhone.nathanreturns.repl.co") end
+if WebsocketClient then ws = WebsocketClient.new("wss://RoPhone.nathanreturns.repl.co") end
+end
+
+Connect()
+ws.OnClose:Connect(function()
+    Connect()
+end)
+
 pcall(function() getgenv().RoPhoneLoaded = true end)
 local RoPhone = Instance.new("ScreenGui")
 local Phone = Instance.new("Frame")
@@ -403,7 +411,7 @@ local function NewContact(n, playing, placeid, jobid, nn)
     end)
     local children = Plr:GetChildren()
     local count = #children
-    if count == 0 then
+    if count == 0 or WhatPlaying.Text == "Label" then
         Plr:Destroy()
     end
 end
@@ -432,9 +440,11 @@ Contacts.MouseButton1Click:Connect(function()
     HomeFrame.Visible = false
 end)
 
+-- syn + websocket Read Messages
+if is_synapse_function or WebSocket then
 ws.OnMessage:Connect(function(data)
     print(data)
-    if not string.find(data, game.Players.LocalPlayer.Name) and not string.find(data, "- PLAYERS GAME") and not string.find(data, "NEW CONNECTION") and data ~= "A client disconnected." and not string.find(data,", is still connected.") then
+    if not string.find(data, game.Players.LocalPlayer.Name) and not string.find(data, "- PLAYERS GAME") and not string.find(data, "NEW CONNECTION") and data ~= "A client disconnected." then
         local split = data:split(", ")
         m = split[1]
         n = split[2]
@@ -459,6 +469,99 @@ ws.OnMessage:Connect(function(data)
     end
 end)
 
+ws.OnMessage:Connect(function(data)
+    if string.find(data, "NEW CONNECTION") then
+        local split = data:split(", ")
+        n = split[2]
+        ws:Send(game.Players.LocalPlayer.Name..", "..game.PlaceId..", "..game.JobId..", "..gname..", - PLAYERS GAME, NICKNAME:, "..getgenv().name)
+task.wait(.2)
+end
+end)
+
+Displayed = {}
+
+ws.OnMessage:Connect(function(data)
+if string.find(data, "- PLAYERS GAME") then
+    local split = data:split(", ")
+    n = split[1]
+    pid = split[2]
+    jid = split[3]
+    gn = split[4]
+    pn = split[6]
+    nn = split[7]
+    NameTag(nn, n)
+    if not contains(Displayed, n) then
+    table.insert(Displayed, n)
+    NewContact(n, gn, pid, jid, nn)
+end
+end
+end)
+
+
+end
+---
+
+
+-- WebsocketClient Read Messages
+if WebsocketClient then
+ws.DataRecieved:Connect(function(data)
+    print(data)
+    if not string.find(data, game.Players.LocalPlayer.Name) and not string.find(data, "- PLAYERS GAME") and not string.find(data, "NEW CONNECTION") and data ~= "A client disconnected." then
+        local split = data:split(", ")
+        m = split[1]
+        n = split[2]
+        nn = split[3]
+        NewMsg(m,n,nn)
+    end
+end)
+
+ws.DataRecieved:Connect(function(data)
+    if data == "A client disconnected." then
+        ws:Send(game.Players.LocalPlayer.Name..", is still connected.")
+        Connected = {}
+        Checking = true
+    end
+end)
+
+ws.DataRecieved:Connect(function(data)
+    if string.find(data,", is still connected.") then
+        local split = data:split(", ")
+        name = split[1]
+        table.insert(Connected,name)
+    end
+end)
+
+ws.DataRecieved:Connect(function(data)
+    if string.find(data, "NEW CONNECTION") then
+        local split = data:split(", ")
+        n = split[2]
+        ws:Send(game.Players.LocalPlayer.Name..", "..game.PlaceId..", "..game.JobId..", "..gname..", - PLAYERS GAME, NICKNAME:, "..getgenv().name)
+task.wait(.2)
+end
+end)
+
+Displayed = {}
+
+ws.DataRecieved:Connect(function(data)
+if string.find(data, "- PLAYERS GAME") then
+    local split = data:split(", ")
+    n = split[1]
+    pid = split[2]
+    jid = split[3]
+    gn = split[4]
+    pn = split[6]
+    nn = split[7]
+    NameTag(nn, n)
+    if not contains(Displayed, n) then
+    table.insert(Displayed, n)
+    NewContact(n, gn, pid, jid, nn)
+end
+end
+end)
+
+
+end
+---
 task.spawn(function()
 repeat task.wait(3)
     if Connected and Checking == true then
@@ -486,25 +589,6 @@ function contains(table, item)
     return false
 end
 
-Displayed = {}
-
-ws.OnMessage:Connect(function(data)
-if string.find(data, "- PLAYERS GAME") then
-    local split = data:split(", ")
-    n = split[1]
-    pid = split[2]
-    jid = split[3]
-    gn = split[4]
-    pn = split[6]
-    nn = split[7]
-    NameTag(nn, n)
-    if not contains(Displayed, n) then
-    table.insert(Displayed, n)
-    NewContact(n, gn, pid, jid, nn)
-end
-end
-end)
-
 local Time = Instance.new("TextLabel")
 Time.Name = "Time"
 Time.Parent = game.Players.LocalPlayer.PlayerGui.RoPhone.Phone.Screen.HomeFrame
@@ -531,19 +615,9 @@ gname = MarketplaceService:GetProductInfo(game.PlaceId)["Name"]
 ws:Send(game.Players.LocalPlayer.Name..", "..game.PlaceId..", "..game.JobId..", "..gname..", - PLAYERS GAME, NICKNAME:, "..getgenv().name)
 ws:Send("NEW CONNECTION, "..game.Players.LocalPlayer.Name)
 
-ws.OnMessage:Connect(function(data)
-    if string.find(data, "NEW CONNECTION") then
-        local split = data:split(", ")
-        n = split[2]
-        ws:Send(game.Players.LocalPlayer.Name..", "..game.PlaceId..", "..game.JobId..", "..gname..", - PLAYERS GAME, NICKNAME:, "..getgenv().name)
-task.wait(.2)
-end
-end)
-
 ScrollingFrame.CanvasSize = UDim2.new(0,0,100,0)
 Chats.CanvasSize = UDim2.new(0,0,100,0)
 ScrollingFrame.ScrollBarThickness = .1
 Chats.ScrollBarThickness = .1
 Phone.Active = true
 Phone.Draggable = true
-end
