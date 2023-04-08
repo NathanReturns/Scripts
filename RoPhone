@@ -444,7 +444,7 @@ end)
 if is_synapse_function or WebSocket then
 ws.OnMessage:Connect(function(data)
     print(data)
-    if not string.find(data, game.Players.LocalPlayer.Name) and not string.find(data, "- PLAYERS GAME") and not string.find(data, "NEW CONNECTION") and data ~= "A client disconnected." then
+    if not string.find(data, game.Players.LocalPlayer.Name) and not string.find(data, "- PLAYERS GAME") and not string.find(data, "NEW CONNECTION") and data ~= "A client disconnected." and not string.find(data, ", is still connected.") then
         local split = data:split(", ")
         m = split[1]
         n = split[2]
