@@ -1,4 +1,4 @@
-getgenv().name = "Nathan"
+--Please dont fuck with the websocket :)
 
 if getgenv().name == nil or getgenv().name == "" then
     getgenv().name = string.sub(game.Players.LocalPlayer.Name,1, 4)
