@@ -10,7 +10,7 @@ if RoPhoneLoaded then
 end
 
 local function Connect()
-if is_synapse_function then ws = syn.websocket.connect("wss://RoPhone.nathanreturns.repl.co") end
+if syn.websocket then ws = syn.websocket.connect("wss://RoPhone.nathanreturns.repl.co") end
 if WebSocket then ws = WebSocket.connect("wss://RoPhone.nathanreturns.repl.co") end
 if WebsocketClient then ws = WebsocketClient.new("wss://RoPhone.nathanreturns.repl.co") end
 end
@@ -563,15 +563,17 @@ end)
 end
 ---
 task.spawn(function()
-repeat task.wait(3)
+repeat task.wait(1)
     if Connected and Checking == true then
+    task.wait(.5)
     for i,v in pairs(game.Players.LocalPlayer.PlayerGui.RoPhone.Phone.Screen.ContactsFrame.ScrollingFrame:GetChildren()) do
         if v.Name == "Plr" then
-            local split = v.WhatPlaying.Text:split(" ")
-            local name = split[1]
+            local start_pos, end_pos = string.find(v.WhatPlaying.Text, "%((.-)%)")
+            local name = string.sub(v.WhatPlaying.Text, start_pos+1, end_pos-1)
             if not string.find(table.concat(Connected),name) then
                 v:Destroy()
                 table.remove(Displayed,table.find(Displayed,name))
+                print(name,"Removed.")
                 Checking = false
             end
         end
