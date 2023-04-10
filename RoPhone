@@ -1,4 +1,4 @@
---Please dont fuck with the websocket :)
+getgenv().name = "Nathan"
 
 if getgenv().name == nil or getgenv().name == "" then
     getgenv().name = string.sub(game.Players.LocalPlayer.Name,1, 4)
@@ -10,7 +10,7 @@ if RoPhoneLoaded then
 end
 
 local function Connect()
-if syn.websocket then ws = syn.websocket.connect("wss://RoPhone.nathanreturns.repl.co") end
+if is_synapse_function then ws = syn.websocket.connect("wss://RoPhone.nathanreturns.repl.co") end
 if WebSocket then ws = WebSocket.connect("wss://RoPhone.nathanreturns.repl.co") end
 if WebsocketClient then ws = WebsocketClient.new("wss://RoPhone.nathanreturns.repl.co") end
 end
@@ -418,7 +418,7 @@ end
 
 Send.MouseButton1Click:Connect(function()
     NewMsg(MsgBox.Text, game.Players.LocalPlayer.Name, getgenv().name)
-    ws:Send(MsgBox.Text..", "..game.Players.LocalPlayer.Name..", "..getgenv().name)
+    ws:Send(MsgBox.Text.."| "..game.Players.LocalPlayer.Name.."| "..getgenv().name)
     MsgBox.Text = ""
 end)
 
@@ -445,7 +445,7 @@ if is_synapse_function or WebSocket then
 ws.OnMessage:Connect(function(data)
     print(data)
     if not string.find(data, game.Players.LocalPlayer.Name) and not string.find(data, "- PLAYERS GAME") and not string.find(data, "NEW CONNECTION") and data ~= "A client disconnected." and not string.find(data, ", is still connected.") then
-        local split = data:split(", ")
+        local split = data:split("| ")
         m = split[1]
         n = split[2]
         nn = split[3]
@@ -507,7 +507,7 @@ if WebsocketClient then
 ws.DataRecieved:Connect(function(data)
     print(data)
     if not string.find(data, game.Players.LocalPlayer.Name) and not string.find(data, "- PLAYERS GAME") and not string.find(data, "NEW CONNECTION") and data ~= "A client disconnected." then
-        local split = data:split(", ")
+        local split = data:split("| ")
         m = split[1]
         n = split[2]
         nn = split[3]
