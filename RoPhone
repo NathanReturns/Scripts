@@ -182,6 +182,7 @@ ScrollingFrame.BorderSizePixel = 0
 ScrollingFrame.Position = UDim2.new(0.00462962966, 0, 0.148997128, 0)
 ScrollingFrame.Size = UDim2.new(0, 215, 0, 297)
 ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+ScrollingFrame.AutomaticCanvasSize = "Y"
 
 UIListLayout.Parent = ScrollingFrame
 UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
@@ -203,6 +204,7 @@ Chats.BorderSizePixel = 0
 Chats.Position = UDim2.new(0.0046513048, 0, 0.0200573057, 0)
 Chats.Size = UDim2.new(0, 213, 0, 323)
 Chats.CanvasSize = UDim2.new(0, 0, 0, 0)
+Chats.AutomaticCanvasSize = "Y"
 
 UIListLayout_2.Parent = Chats
 UIListLayout_2.HorizontalAlignment = Enum.HorizontalAlignment.Center
@@ -318,6 +320,7 @@ local function NewMsg(msg,n,nn)
     Message.TextScaled = true
     Message.TextSize = 14.000
     Message.TextWrapped = true
+    ScrollingFrame.CanvasPosition = ScrollingFrame.CanvasPosition * Vector2.new(0,54)
 end
 
 local TextLabel_4 = Instance.new("TextLabel")
@@ -578,6 +581,7 @@ repeat task.wait(1)
             end
         end
     end
+    Checking = false
     end
 until false
 end)
@@ -617,9 +621,5 @@ gname = MarketplaceService:GetProductInfo(game.PlaceId)["Name"]
 ws:Send(game.Players.LocalPlayer.Name..", "..game.PlaceId..", "..game.JobId..", "..gname..", - PLAYERS GAME, NICKNAME:, "..getgenv().name)
 ws:Send("NEW CONNECTION, "..game.Players.LocalPlayer.Name)
 
-ScrollingFrame.CanvasSize = UDim2.new(0,0,100,0)
-Chats.CanvasSize = UDim2.new(0,0,100,0)
-ScrollingFrame.ScrollBarThickness = .1
-Chats.ScrollBarThickness = .1
 Phone.Active = true
 Phone.Draggable = true
