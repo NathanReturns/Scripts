@@ -320,8 +320,9 @@ local function NewMsg(msg,n,nn)
     Message.TextScaled = true
     Message.TextSize = 14.000
     Message.TextWrapped = true
-    ScrollingFrame.CanvasPosition = ScrollingFrame.CanvasPosition * Vector2.new(0,54)
+    Chats.CanvasPosition = Chats.CanvasPosition + Vector2.new(0, 100)
 end
+
 
 local TextLabel_4 = Instance.new("TextLabel")
     TextLabel_4.Parent = ContactsFrame
