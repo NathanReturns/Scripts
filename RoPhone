@@ -411,7 +411,8 @@ local function NewContact(n, playing, placeid, jobid, nn)
     Join.TextSize = 14.000
     Join.TextWrapped = true
     Join.MouseButton1Click:Connect(function()
-    game:GetService("TeleportService"):TeleportToPlaceInstance(placeid, jobid, game.Players.LocalPlayer)
+        syn.queue_on_teleport('repeat task.wait() until game:IsLoaded() loadstring(game:HttpGet("https://raw.githubusercontent.com/NathanReturns/Scripts/main/RoPhone"))()')
+        game:GetService("TeleportService"):TeleportToPlaceInstance(placeid, jobid, game.Players.LocalPlayer)
     end)
     local children = Plr:GetChildren()
     local count = #children
