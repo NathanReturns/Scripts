@@ -16,9 +16,17 @@ if WebsocketClient then ws = WebsocketClient.new("wss://RoPhone.nathanreturns.re
 end
 
 Connect()
+if syn.websocket then
 ws.OnClose:Connect(function()
     Connect()
 end)
+end
+
+if WebsocketClient then
+ws.ConnectionClosed:Connect(function()
+    ws = WebsocketClient.new("wss://RoPhone.nathanreturns.repl.co")
+end)
+end
 
 pcall(function() getgenv().RoPhoneLoaded = true end)
 local RoPhone = Instance.new("ScreenGui")
