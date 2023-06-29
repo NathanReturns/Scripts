@@ -1,6 +1,6 @@
 --Please dont fuck with the websocket :)
 
-if getgenv().name == nil or getgenv().name == "" then
+if getgenv().name == nil or getgenv().name == "" or getgenv().name == " " or #getgenv().name > 9 then
     getgenv().name = string.sub(game.Players.LocalPlayer.Name,1, 4)
 end
 
@@ -10,23 +10,16 @@ if RoPhoneLoaded then
 end
 
 local function Connect()
-if syn.websocket then ws = syn.websocket.connect("wss://RoPhone.nathanreturns.repl.co") end
-if WebSocket then ws = WebSocket.connect("wss://RoPhone.nathanreturns.repl.co") end
-if WebsocketClient then ws = WebsocketClient.new("wss://RoPhone.nathanreturns.repl.co") end
+	if WebSocket then ws = WebSocket.connect("wss://RoPhone.nathanreturns.repl.co")
+	elseif WebsocketClient then ws = WebsocketClient.new("wss://RoPhone.nathanreturns.repl.co")
+	elseif syn.websocket then ws = syn.websocket.connect("wss://RoPhone.nathanreturns.repl.co")
+	end
 end
 
 Connect()
-if syn.websocket then
 ws.OnClose:Connect(function()
     Connect()
 end)
-end
-
-if WebsocketClient then
-ws.ConnectionClosed:Connect(function()
-    ws = WebsocketClient.new("wss://RoPhone.nathanreturns.repl.co")
-end)
-end
 
 pcall(function() getgenv().RoPhoneLoaded = true end)
 local RoPhone = Instance.new("ScreenGui")
@@ -291,6 +284,18 @@ UICorner_10.Parent = Frame_6
 
 HomeFrame.Visible = true
 
+local Unread = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+
+Unread.Name = "Unread"
+Unread.Parent = ChatR
+Unread.BackgroundColor3 = Color3.fromRGB(255, 0, 4)
+Unread.Position = UDim2.new(0.717948735, 0, 0, 0)
+Unread.Size = UDim2.new(0, 11, 0, 11)
+
+UICorner.Parent = Unread
+Unread.Visible = false
+
 local function NewMsg(msg,n,nn)
     local NewMsg = Instance.new("Frame")
     local Name = Instance.new("TextLabel")
@@ -303,13 +308,14 @@ local function NewMsg(msg,n,nn)
     NewMsg.Position = UDim2.new(0.0352112688, 0, 0, 0)
     NewMsg.Size = UDim2.new(0, 198, 0, 94)
     
+    
     Name.Name = "Name"
     Name.Parent = NewMsg
     Name.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     Name.BackgroundTransparency = 1.000
     Name.Size = UDim2.new(0, 198, 0, 16)
     Name.Font = Enum.Font.SourceSans
-    Name.Text = nn.." ("..n.."):"
+    Name.Text = getgenv().time..": "..nn.." ("..n.."):"
     Name.TextColor3 = Color3.fromRGB(255, 255, 255)
     Name.TextScaled = true
     Name.TextSize = 14.000
@@ -329,8 +335,13 @@ local function NewMsg(msg,n,nn)
     Message.TextSize = 14.000
     Message.TextWrapped = true
     Chats.CanvasPosition = Chats.CanvasPosition + Vector2.new(0, 100)
+    
+    task.spawn(function()
+        Unread.Visible = true
+        repeat task.wait() until ReadingMessages == true or ChatFrame.Visible == true
+        Unread.Visible = false
+    end)
 end
-
 
 local TextLabel_4 = Instance.new("TextLabel")
     TextLabel_4.Parent = ContactsFrame
@@ -419,8 +430,7 @@ local function NewContact(n, playing, placeid, jobid, nn)
     Join.TextSize = 14.000
     Join.TextWrapped = true
     Join.MouseButton1Click:Connect(function()
-        syn.queue_on_teleport('repeat task.wait() until game:IsLoaded() loadstring(game:HttpGet("https://raw.githubusercontent.com/NathanReturns/Scripts/main/RoPhone"))()')
-        game:GetService("TeleportService"):TeleportToPlaceInstance(placeid, jobid, game.Players.LocalPlayer)
+    game:GetService("TeleportService"):TeleportToPlaceInstance(placeid, jobid, game.Players.LocalPlayer)
     end)
     local children = Plr:GetChildren()
     local count = #children
@@ -439,18 +449,24 @@ HomeButton.MouseButton1Click:Connect(function()
     ContactsFrame.Visible = false
     ChatFrame.Visible = false
     HomeFrame.Visible = true
+    ViewingMessages = false
 end)
 
 ChatR.MouseButton1Click:Connect(function()
     ContactsFrame.Visible = false
     ChatFrame.Visible = true
     HomeFrame.Visible = false
+    
+    ViewingMessages = true
+    Unread.Visible = false
 end)
 
 Contacts.MouseButton1Click:Connect(function()
     ContactsFrame.Visible = true
     ChatFrame.Visible = false
     HomeFrame.Visible = false
+    
+    ViewingMessages = false
 end)
 
 -- syn + websocket Read Messages
@@ -621,8 +637,8 @@ Time.TextWrapped = true
 
 task.spawn(function()
     repeat task.wait()
-        time = os.date("%H:".."%M".." %p")
-        Time.Text = time
+        getgenv().time = os.date("%H:".."%M".." %p")
+        Time.Text = getgenv().time
     until false
 end)
 
